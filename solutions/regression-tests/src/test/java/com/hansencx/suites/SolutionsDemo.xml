@@ -1,0 +1,12 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name = "Wordpress" parallel="tests" thread-count="2">
+    <test name = "Wordpress Test Chrome" parallel="classes" thread-count="2">
+        <parameter name="browser" value="chrome" />
+        <parameter name="mode" value="NonRemote" />
+        <classes>
+            <class name = "com.hansencx.tests.SolutionsDemoPageTests"/>
+            <class name = "com.hansencx.tests.Tests"/>
+        </classes>
+    </test>
+</suite>

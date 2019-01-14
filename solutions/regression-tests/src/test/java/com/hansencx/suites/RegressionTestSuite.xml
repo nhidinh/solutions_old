@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="FirstSuite" verbose="10">
+    <listeners>
+        <listener class-name="com.hansencx.solutions.reporting.listeners.TestListener"/>
+    </listeners>
+
+    <parameter name="browser" value="chrome"/>
+    <parameter name="username" value="nhidinh"/>
+    <parameter name="encodedPassword" value="UDRhc3N3MHJkMSE=" />
+
+    <suite-files>
+        <suite-file path="LoginTests.xml"/>
+        <suite-file path="PostTests.xml"/>
+        <suite-file path="PostDelete_Tests.xml"/>
+        <suite-file path="MediaTests.xml"/>
+    </suite-files>
+</suite>
