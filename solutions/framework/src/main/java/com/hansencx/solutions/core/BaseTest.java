@@ -19,7 +19,7 @@ import java.net.MalformedURLException;
  * @since   2018-12-03
  */
 public class BaseTest {
-    private WebDriver driver;
+    public WebDriver driver;
 
     /**
      * Constructor
@@ -50,7 +50,7 @@ public class BaseTest {
      * @see
      */
     @Parameters({"browser","mode"})
-    @BeforeClass
+    @BeforeTest
     public void setUp(final String browser, final String mode, ITestContext testContext){
         if(mode.equals("NonRemote")){
             driver = DriverConfiguration.configureDriver(browser);
@@ -69,7 +69,7 @@ public class BaseTest {
         ExtentManager.createRootNode(testContext.getName());
     }
 
-    //@BeforeTest
+//    @BeforeTest
     public void SetUpLoggerBeforeTest(ITestContext context) {
         String testCaseName = context.getName();
         Log.startLog();
@@ -122,7 +122,7 @@ public class BaseTest {
         }
     }
 
-    //@AfterTest
+//    @AfterTest
     public void EndingTest(ITestContext context) {
         String testCaseName = context.getName();
         Log.endTestCase(testCaseName);

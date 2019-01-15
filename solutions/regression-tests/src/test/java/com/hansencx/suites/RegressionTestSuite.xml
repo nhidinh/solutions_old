@@ -10,9 +10,9 @@
     <parameter name="encodedPassword" value="UDRhc3N3MHJkMSE=" />
 
     <suite-files>
-        <suite-file path="LoginTests.xml"/>
-        <suite-file path="PostTests.xml"/>
-        <suite-file path="PostDelete_Tests.xml"/>
-        <suite-file path="MediaTests.xml"/>
+        <!--<suite-file path="LoginTests.xml"/>-->
+        <!--<suite-file path="PostTests.xml"/>-->
+        <!--<suite-file path="PostDelete_Tests.xml"/>-->
+        <!--<suite-file path="MediaTests.xml"/>-->
     </suite-files>
 </suite>

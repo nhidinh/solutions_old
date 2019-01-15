@@ -64,15 +64,9 @@ public class BasePage {
         return "End " + action + " " + value + " element with locator " + elementLocator + " " + tail;
     }
 
-
-
     public void verifyElementPresent(WebElement element){
         Assert.assertEquals(true, element.isDisplayed());
     }
-
-
-
-
 
     public void navigateToPage(String url){
         Log.info("Navigating to " + url);
@@ -245,9 +239,19 @@ public class BasePage {
      * @since 2018-12-03
      * @see
      */
-//    public void click(WebElement element){
-//        element.click();
-//    }
+    public void click(WebElement element){
+        String elementLocator = getLocatorOfElement(element);
+        try {
+            waitForElementToAppear(element);
+            Log.info(setStartMessage("clicking to", "", elementLocator, ""));
+            element.click();
+            Log.info(setEndMessage("clicking to", "", elementLocator, ""));
+        }catch (Exception e){
+            Log.error("Unable to click element at: " + elementLocator);
+            Log.error(e.getMessage());
+            System.out.println(e.getMessage());
+        }
+    }
 
     public boolean isElementPresent(WebElement element){
         String elementLocator = getLocatorOfElement(element) ;

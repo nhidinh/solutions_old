@@ -1,0 +1,18 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name = "Portal-SearchTest" >
+    <parameter name="browser" value="chrome" />
+    <parameter name="mode" value="NonRemote" />
+    <parameter name="username" value="QAREQUESTER"/>
+    <parameter name="password" value="QA!requestor1" />
+
+    <test name = "Portal-SearchByEnrollmentNumberInList" >
+       <classes>
+           <class name="com.hansencx.portal.Search_Tests">
+               <methods>
+                   <include name="SearchByEnrollmentNumberInList"/>
+               </methods>
+           </class>
+       </classes>
+    </test>
+</suite>
