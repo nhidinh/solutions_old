@@ -19,17 +19,17 @@ public class SearchPage extends BasePage {
     WebElement btnClear;
     @FindBy(name = "EnrollmentNumberFilter")
     WebElement ddlEnrollmentNumberFilter;
-    @FindBy(id="EnrollmentNumber")
+//    @FindBy(id="EnrollmentNumber")
+    @FindBy(xpath = "//*[contains(@data-bind,\"EnrollmentNumber.Value\")]")
     WebElement txtEnrollmentNumber;
+    @FindBy(id = "Suppliers")
+    WebElement lstSupplierName;
 
-    public WebElement getOptionElement(String parent, String option){
-        WebElement opt = driver.findElement(By.xpath(""));
-        return opt;
-    }
 
     //METHODS
     public void clickSearchButton(){
         click(btnSearch);
+        waitForPageLoad();
     }
     public void clickClearButton(){
         click(btnClear);
@@ -41,10 +41,15 @@ public class SearchPage extends BasePage {
         Select selectEnrollmentNumberFilter = new Select(ddlEnrollmentNumberFilter);
         selectEnrollmentNumberFilter.selectByVisibleText(option);
     }
+    public void selectSupplierByName(String supplierName){
+        Select selectSupplierName = new Select(lstSupplierName);
+        selectSupplierName.selectByVisibleText(supplierName);
+    }
 
     //ACTIONS
     public void SearchByEnrollmentNumberWithFilter(String option, String enrollNumber){
         selectEnrollmentNumberFilterOption(option);
         setTextEnrollmentNumber(enrollNumber);
     }
+
 }

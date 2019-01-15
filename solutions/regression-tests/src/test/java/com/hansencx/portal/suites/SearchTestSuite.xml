@@ -15,4 +15,14 @@
            </class>
        </classes>
     </test>
+
+    <test name = "Portal-Search by Enrollment Number with Data File" >
+        <classes>
+            <class name="com.hansencx.portal.Search_Tests">
+                <methods>
+                    <include name="SearchByEnrollmentNumberWithDataFile"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

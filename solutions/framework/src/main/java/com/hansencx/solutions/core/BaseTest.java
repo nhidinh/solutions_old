@@ -111,7 +111,7 @@ public class BaseTest {
      * @since 2018-12-03
      * @see ITestContext
      */
-    //@AfterClass
+    @AfterTest
     public synchronized void clean(ITestContext testContext){
         String testCaseName = testContext.getName();
         Log.endTestCase(testCaseName);

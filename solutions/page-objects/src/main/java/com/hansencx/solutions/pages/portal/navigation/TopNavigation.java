@@ -21,6 +21,7 @@ public class TopNavigation extends BasePage {
     //METHODS
     public void clickSearchButton(){
         click(btnSearch);
+        waitForPageLoad();
     }
     public void clickLogoutButton(){
         click(btnLogout);
