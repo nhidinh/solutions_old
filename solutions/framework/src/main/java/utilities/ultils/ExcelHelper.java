@@ -6,8 +6,9 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Platform;
-import utilities.logger.Log;
+import com.hansencx.solutions.logger.Log;
 import org.apache.poi.ss.usermodel.Cell;
+import utilities.configuration.InitialData;
 
 
 import java.io.FileInputStream;
@@ -26,7 +27,7 @@ import static org.apache.commons.io.FilenameUtils.separatorsToSystem;
 
 public class ExcelHelper {
 
-    private static Platform platform = InitData.PLATFORM;
+    private static Platform platform = InitialData.PLATFORM;
     private static String testDataExcelPath;
 
     private static XSSFWorkbook excelWorkBook;
@@ -148,7 +149,7 @@ public class ExcelHelper {
 
     public static void setupExcelTestData(String DataDirectory,String testDataExcelName, String ExcelSheetName){
         Log.info("Setting up Test Data");
-//        InitData.getProjectDirectory();
+//        InitialData.getProjectDirectory();
         ExcelHelper.setDataFileLocation(DataDirectory, testDataExcelName);
         ExcelHelper.setExcelFileSheet(ExcelSheetName);
     }

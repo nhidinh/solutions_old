@@ -8,7 +8,7 @@
 
     <test name = "Portal-SearchByEnrollmentNumberInList" >
        <classes>
-           <class name="com.hansencx.portal.Search_Tests">
+           <class name="com.hansencx.portal.tests.Search_Tests">
                <methods>
                    <include name="SearchByEnrollmentNumberInList"/>
                </methods>
@@ -16,9 +16,9 @@
        </classes>
     </test>
 
-    <test name = "Portal-Search by Enrollment Number with Data File" >
+    <test name = "Portal-Search by Enrollment Number with Data File" enabled="true">
         <classes>
-            <class name="com.hansencx.portal.Search_Tests">
+            <class name="com.hansencx.portal.tests.Search_Tests">
                 <methods>
                     <include name="SearchByEnrollmentNumberWithDataFile"/>
                 </methods>

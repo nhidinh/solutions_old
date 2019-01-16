@@ -43,7 +43,7 @@ public class FileHelper {
     public static void createDirectory (String path) {
         File testDirectory = new File(path);
         if (!testDirectory.exists()) {
-            if (testDirectory.mkdir()) {
+            if (testDirectory.mkdirs()) {
                 System.out.println("Directory: " + path + " is created!");
             } else {
                 System.out.println("Failed to create directory: " + path);

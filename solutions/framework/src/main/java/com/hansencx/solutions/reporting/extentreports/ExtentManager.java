@@ -4,10 +4,13 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import org.testng.ITestResult;
-import utilities.ultils.Fields;
+import utilities.configuration.InitialData;
+import utilities.ultils.FileHelper;
 
 import java.io.File;
 import java.lang.reflect.Method;
+
+import static org.apache.commons.io.FilenameUtils.separatorsToSystem;
 
 /**
  * ExtentManager class (IN DEVELOPING...)
@@ -24,6 +27,8 @@ public class ExtentManager {
     private static ExtentTest parent;
     private static ExtentTest child;
 
+    private static String reportDir_path;
+
     /**
      * Get instance of ExtentHtmlReporter
      * @author Huong Trinh
@@ -34,20 +39,22 @@ public class ExtentManager {
      */
     public final static ExtentReports getInstance() {
         if (extent == null)
-            createInstance(Fields.ROOT_DIRECTORY + "\\regression-tests\\reports\\"+ "Extent.html");
+            createInstance();
         return extent;
     }
 
     /**
-     * Create instance of ExtentHtmlReporter, load config of report from extent-config.xml
+     * Create instance of ExtentHtmlReporter, load com.hansencx.solutions.reporting.extentreports.config of report from extent-com.hansencx.solutions.reporting.extentreports.config.xml
      * @author Huong Trinh
-     * @param fileName output report name, stored location, provide link
+     * @param
      * @return ExtentReport object
      * @since   03.01.2019
      */
-    private static ExtentReports createInstance(String fileName) {
+    private static ExtentReports createInstance() {
+        String fileName = setReportFileName();
+        FileHelper.createDirectory(reportDir_path);
         ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(fileName);
-        htmlReporter.loadXMLConfig(new File(System.getProperty("user.dir") + "\\regression-tests\\src\\test\\java\\config\\extent-config.xml"));
+        htmlReporter.loadXMLConfig(new File(InitialData.REPORT_CONFIG_XML_FILE_PATH));
 
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
@@ -100,5 +107,17 @@ public class ExtentManager {
             test.get().pass("Test Methods " + method.getName() + " Passed" );
         }
         extent.flush();
+    }
+
+    /**
+     * GenerateReport and set the status of tests
+     * @author Nhi Dinh
+     * @return String
+     * @since   16.01.2019
+     */
+    private static String setReportFileName() {
+        reportDir_path = separatorsToSystem(InitialData.REPORT_DIR_PATH);
+        String reportFile_path = separatorsToSystem(InitialData.REPORT_FILE_PATH);
+        return reportFile_path;
     }
 }

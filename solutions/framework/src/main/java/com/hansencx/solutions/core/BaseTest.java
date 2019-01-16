@@ -1,12 +1,12 @@
 package com.hansencx.solutions.core;
 
-import com.hansencx.solutions.config.DriverConfiguration;
+import utilities.configuration.DriverConfiguration;
 import com.hansencx.solutions.reporting.extentreports.ExtentManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-import utilities.logger.Log;
+import com.hansencx.solutions.logger.Log;
 
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
@@ -19,7 +19,7 @@ import java.net.MalformedURLException;
  * @since   2018-12-03
  */
 public class BaseTest {
-    public WebDriver driver;
+    private WebDriver driver;
 
     /**
      * Constructor
