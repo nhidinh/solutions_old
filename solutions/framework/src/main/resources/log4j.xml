@@ -15,8 +15,8 @@
             <param name="ConversionPattern" value="%d %-5p [%c{1}] %m %n" />
         </layout>
     </appender>
-       <root>
-           <level value="INFO"/>
+    <root>
+        <level value="INFO"/>
         <appender-ref ref="fileAppender"/>
     </root>
 

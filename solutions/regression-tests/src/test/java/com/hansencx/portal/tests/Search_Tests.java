@@ -2,10 +2,14 @@ package com.hansencx.portal.tests;
 
 import com.hansencx.solutions.portal.PortalBaseTest;
 import org.testng.Assert;
+import org.testng.ITestContext;
+import org.testng.ITestResult;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import com.hansencx.solutions.logger.Log;
+import utilities.configuration.TestListener;
 import utilities.ultils.ExcelHelper;
+import utilities.ultils.FailureHandling;
 
 /**
  * @param
@@ -21,6 +25,7 @@ public class Search_Tests extends PortalBaseTest {
         Page.TopNavigation().clickSearchButton();
         Page.Search().SearchByEnrollmentNumberWithFilter("in list", "1");
         Page.Search().clickSearchButton();
+        Assert.assertEquals(Page.SearchResult().GetNumberOfResult(),2 );
     }
 
     @BeforeTest
@@ -37,14 +42,18 @@ public class Search_Tests extends PortalBaseTest {
         String testcaseName;
         String filterOption;
         String enrollmentNumberValue;
+        String result;
         int filterOptionCell = ExcelHelper.getCellIndexByText("Filter");
         int EnrollmentNumberValueCell = ExcelHelper.getCellIndexByText("Value");
         int tcNameCell = ExcelHelper.getCellIndexByText("TestCaseName");
+        int resultCell = ExcelHelper.getCellIndexByText("Result");
 
         for(int i = 1; i<countRow; i++){
             filterOption = ExcelHelper.getCellData(i, filterOptionCell);
             enrollmentNumberValue = ExcelHelper.getCellData(i, EnrollmentNumberValueCell);
             testcaseName = ExcelHelper.getCellData(i, tcNameCell);
+            result = ExcelHelper.getCellData(i, resultCell);
+            int resultValue = Integer.parseInt(result);
 
             Page.TopNavigation().clickSearchButton();
             if(filterOption.equals("contains")){
@@ -52,7 +61,12 @@ public class Search_Tests extends PortalBaseTest {
             }
             Page.Search().SearchByEnrollmentNumberWithFilter(filterOption, enrollmentNumberValue);
             Page.Search().clickSearchButton();
-
+            int numberOfResult = Page.SearchResult().GetNumberOfResult();
+            try {
+                Assert.assertEquals(numberOfResult, resultValue);
+            }catch (AssertionError e){
+                FailureHandling.ContinueAtFailedTestCase(e, testcaseName);
+            }
             Log.info("Complete Test case: "+ testcaseName);
             System.out.println("Compete Test case: " + testcaseName);
 

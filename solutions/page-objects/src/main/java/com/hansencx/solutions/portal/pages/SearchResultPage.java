@@ -2,6 +2,10 @@ package com.hansencx.solutions.portal.pages;
 
 import com.hansencx.solutions.core.BasePage;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 /**
  * @param
@@ -16,6 +20,12 @@ public class SearchResultPage extends BasePage {
         super(driver);
     }
 
+    //ELEMENTS
+    @FindBy(xpath = "//table[@id='gvSearchResults']//tr")
+    List<WebElement> lstResult;
 
+    public int GetNumberOfResult(){
+        return lstResult.size();
+    }
 
 }

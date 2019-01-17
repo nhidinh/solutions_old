@@ -1,6 +1,6 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name = "Portal-Search Tests" >
+<suite name = "Portal-Cancel Rebill Tests" >
     <parameter name="browser" value="chrome" />
     <parameter name="mode" value="NonRemote" />
     <parameter name="username" value="QAREQUESTER"/>
@@ -19,13 +19,4 @@
        </classes>
     </test>
 
-    <test name = "Portal-Search by Enrollment Number with Data File" enabled="true">
-        <classes>
-            <class name="com.hansencx.portal.tests.Search_Tests">
-                <methods>
-                    <include name="SearchByEnrollmentNumberWithDataFile"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
 </suite>

@@ -26,9 +26,9 @@ public class InitialData {
 
     //LOG DIRECTORY AND FILE PATH
     private static String FILE_NAME_LOG = TIMESTAMP + ".log";
-    public static String LOG_DIR_PATH = PARENT_DIR+"/logs";
+    public static String LOG_DIR_PATH = PARENT_DIR+"\\solutions\\regression-tests\\logs";
     public static String LOG_FILE_PATH = LOG_DIR_PATH + "/" + FILE_NAME_LOG;
-//    public static String LOG_CONFIG_FILE_PATH = "./framework/src/main/java/com/hansencx/solutions/util/logger/log4j.xml";
+    public static String LOG_CONFIG_FILE_PATH = "./framework/src/main/java/com/hansencx/solutions/util/logger/log4j.xml";
 
     //REPORT DIRECTORY PATH
     public static String FILE_NAME_REPORT = "REPORT-"+TIMESTAMP+".html";
@@ -37,9 +37,6 @@ public class InitialData {
 
     //FILE PATH OF extent-config.xml file
     public static String REPORT_CONFIG_XML_FILE_PATH = PARENT_DIR+"\\solutions\\framework\\src\\main\\java\\com\\hansencx\\solutions\\reporting\\extentreports\\config\\extent-config.xml";
-
-    ///TEST DATA SOURCE PATH
-    public static String TEST_DATASOURCE_PATH = PARENT_DIR+"//data-files//" ;
 
     //Get current platform
     private static Platform getCurrentPlatform () {
@@ -64,7 +61,6 @@ public class InitialData {
     public static String getProjectDirectory() {
         Path dirPath = Paths.get(ROOT_DIRECTORY).toAbsolutePath();
         PARENT_DIR = dirPath.getParent().toString();
-        System.out.println("Parent Directory: " + PARENT_DIR);
         return PARENT_DIR;
     }
 }

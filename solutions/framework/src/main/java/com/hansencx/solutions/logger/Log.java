@@ -4,56 +4,43 @@ import org.apache.log4j.xml.DOMConfigurator;
 import utilities.ultils.FileHelper;
 import utilities.configuration.InitialData;
 
+import static org.apache.commons.io.FilenameUtils.separatorsToSystem;
+
 /**
  * Log class (IN DEVELOPING...)
  *
  * @author  Nhi Dinh
- * @version 1.0
+ * @version 2.0
  * @since
+ * @Update 17/01/2019
  */
 public class Log {
     private static Logger log;
-    private static String timeStamp = InitialData.TIMESTAMP;
-    private static String logFileName = timeStamp + ".log";
-
-    private static String macPath = InitialData.ROOT_DIRECTORY + "/regression-tests/logs";
-    private static String windowsPath = InitialData.ROOT_DIRECTORY + "/regression-tests/logs";
-
-    private static String MAC_Log_location = macPath + "/" + logFileName;
-    private static String WIN_Log_location = windowsPath + "\\" + logFileName;
-
-    private static String MAC_ConfigFile_Loc = InitialData.ROOT_DIRECTORY + "/framework/src/main/java/utilities/Logger/log4j.xml";
-    private static String WIN_ConfigFile_loc = InitialData.ROOT_DIRECTORY + "\\framework\\src\\main\\java\\utilities\\Logger\\log4j.xml";
-    ;
+    private static String configFile_path;
 
     public static void initLogger() {
+        System.out.println("Setting Log File Location...");
         setLogFileLocation();
-        getLog4jConfigurationFile();
         log = Logger.getLogger(Log.class.getName());
     }
 
     private static void setLogFileLocation() {
-        FileHelper.macPath = macPath;
-        FileHelper.winPath = windowsPath;
-        FileHelper.MAC_fileLocation = MAC_Log_location;
-        FileHelper.WIN_fileLocation = WIN_Log_location;
-        String logLocation = FileHelper.getFileLocation();
-
-        System.setProperty("logLocation", logLocation);
-        System.out.println("Log file is created at: " + logLocation);
+        String logDir_path = separatorsToSystem(InitialData.LOG_DIR_PATH);
+        String logFile_path = separatorsToSystem(InitialData.LOG_FILE_PATH);
+        System.out.println("Log File Path is: " + logFile_path);
+        FileHelper.createDirectory(logDir_path);
+        System.setProperty("logLocation", logFile_path);
     }
 
     private static void getLog4jConfigurationFile() {
-        FileHelper.MAC_fileLocation = MAC_ConfigFile_Loc;
-        FileHelper.WIN_fileLocation = WIN_ConfigFile_loc;
-        String configLog4jFile = FileHelper.getFileLocation();
-
-        DOMConfigurator.configure(configLog4jFile);
+        configFile_path = separatorsToSystem(InitialData.LOG_CONFIG_FILE_PATH);
+        DOMConfigurator.configure(configFile_path);
     }
 
     public static void startLog() {
         initLogger();
         log.info("Start Log...");
+        System.out.println("Start Log...");
     }
 
     public static void endLog() {

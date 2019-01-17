@@ -2,12 +2,24 @@ package com.hansencx.solutions.reporting.extentreports;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.MediaEntityModelProvider;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.hansencx.solutions.logger.Log;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.testng.ITestContext;
 import org.testng.ITestResult;
 import utilities.configuration.InitialData;
 import utilities.ultils.FileHelper;
+import org.apache.commons.codec.binary.Base64;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Method;
 
 import static org.apache.commons.io.FilenameUtils.separatorsToSystem;
@@ -37,14 +49,15 @@ public class ExtentManager {
      * @since   03.01.2019
      * @see ExtentReports
      */
-    public final static ExtentReports getInstance() {
-        if (extent == null)
-            createInstance();
+    public final static ExtentReports getInstance( ) {
+        if (extent == null) {
+            extent = createInstance();
+        }
         return extent;
     }
 
     /**
-     * Create instance of ExtentHtmlReporter, load com.hansencx.solutions.reporting.extentreports.config of report from extent-com.hansencx.solutions.reporting.extentreports.config.xml
+     * Create instance of ExtentHtmlReporter, load extent-config.xml file
      * @author Huong Trinh
      * @param
      * @return ExtentReport object
@@ -70,7 +83,7 @@ public class ExtentManager {
      * @since   03.01.2019
      */
 
-    public static void createRootNode(String displayedName){
+    public static void createRootNode(ExtentReports extent,String displayedName){
         parent = extent.createTest(displayedName);
         parentTest.set(parent);
     }
@@ -78,46 +91,60 @@ public class ExtentManager {
     /**
      * Create Test to listen for report data from methods.
      * @author Huong Trinh
-     * @param method is used to get name of method
+     * @param  testDescription is used to get name of method
      * @return void
      * @since   03.01.2019
      */
 
-    public static void createTest(Method method){
+    public static void createTest(String testDescription){
         System.out.println(" create test " + parentTest.get());
-
-        child = parentTest.get().createNode(method.getName());
+        child = parentTest.get().createNode(testDescription);
         test.set(child);
     }
 
     /**
-     * GenerateReport and set the status of tests
-     * @author Huong Trinh
-     * @param result is used to get status
-     * @param method is used to get name of methods
-     * @return void
-     * @since   03.01.2019
+     * Get Extent Report Test
+     * @author Nhi Dinh
+     * @return ExtentTest
+     * @since   17.01.2019
      */
-    public static void generateReport(ITestResult result, Method method){
-        if(result.getStatus() == ITestResult.FAILURE){
-            test.get().fail(result.getThrowable());
-        }else if(result.getStatus() ==ITestResult.SKIP){
-            test.get().skip(result.getThrowable());
-        }else {
-            test.get().pass("Test Methods " + method.getName() + " Passed" );
-        }
-        extent.flush();
+
+    public static ThreadLocal<ExtentTest> getTest(){
+        return test;
     }
 
     /**
-     * GenerateReport and set the status of tests
+     * setReportFileName
      * @author Nhi Dinh
      * @return String
-     * @since   16.01.2019
+     * @since   17.01.2019
      */
+
     private static String setReportFileName() {
         reportDir_path = separatorsToSystem(InitialData.REPORT_DIR_PATH);
         String reportFile_path = separatorsToSystem(InitialData.REPORT_FILE_PATH);
         return reportFile_path;
     }
+
+    public static String getBase64Screenshot(WebDriver driver, String screenshotName) throws IOException {
+        String encodedBase64 = null;
+        FileInputStream fileInputStream = null;
+        TakesScreenshot screenshot = (TakesScreenshot) driver;
+        File source = screenshot.getScreenshotAs(OutputType.FILE);
+        String destination = reportDir_path + "\\FailedTestsScreenshots\\" + screenshotName + InitialData.TIMESTAMP + ".png";
+        File finalDestination = new File(destination);
+        FileUtils.copyFile(source, finalDestination);
+
+        try {
+            fileInputStream = new FileInputStream(finalDestination);
+            byte[] bytes = new byte[(int) finalDestination.length()];
+            fileInputStream.read(bytes);
+            encodedBase64 = new String(Base64.encodeBase64(bytes));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return encodedBase64;
+    }
+
 }

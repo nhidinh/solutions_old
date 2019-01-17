@@ -1,14 +1,15 @@
 package com.hansencx.solutions.core;
 
-import utilities.configuration.DriverConfiguration;
+import com.aventstack.extentreports.ExtentReports;
 import com.hansencx.solutions.reporting.extentreports.ExtentManager;
+import utilities.configuration.DriverConfiguration;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
-import org.testng.ITestResult;
 import org.testng.annotations.*;
 import com.hansencx.solutions.logger.Log;
+import utilities.configuration.driver.DriverType;
+import utilities.ultils.Browser;
 
-import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 
 /**
@@ -17,9 +18,12 @@ import java.net.MalformedURLException;
  * @author  Vi Nguyen, Huong Trinh
  * @version 1.0
  * @since   2018-12-03
+ * @Updated Nhi Dinh 17/01/2019
+ *
  */
 public class BaseTest {
     private WebDriver driver;
+    private static ExtentReports extent;
 
     /**
      * Constructor
@@ -28,79 +32,35 @@ public class BaseTest {
         return driver;
     }
 
-    /**
-     * For reporting
-     */
+
     @BeforeSuite
-    public synchronized void getInstanceForReport(){
-        ExtentManager.getInstance();
+    public void SettingReportBeforeSuite(ITestContext iTestContext){
+        extent = ExtentManager.getInstance();
+        String suiteName = iTestContext.getCurrentXmlTest().getSuite().getName();
+        ExtentManager.createRootNode(extent, suiteName);
     }
 
-    /**
-     * About reporting: ExtentManager.createNode() will get name of main mode,
-     * depended on our design, so this method can be located in BeforeTest/BeforeClass/BeforeSuite
-     */
-
-    /**
-     * Quit driver after running a test suite
-     * @author Huong Trinh
-     * @param
-     * @return Nothing.
-     * @since 2018-12-03
-     * @see
-     */
     @Parameters({"browser","mode"})
     @BeforeTest
-    public void setUp(final String browser, final String mode, ITestContext testContext){
+    public void setUp(final DriverType browser, final String mode, ITestContext testContext){
         if(mode.equals("NonRemote")){
-            driver = DriverConfiguration.configureDriver(browser);
+            Browser.Setup(browser, testContext);
+            driver = (WebDriver) testContext.getAttribute("driver");
         }else if(mode.equals("Remote")){
             try {
-                driver = DriverConfiguration.configureRemoteDriver(browser);
+                driver = DriverConfiguration.configureRemoteDriver(browser.toString());
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
         }
-        driver.manage().window().maximize();
+        Browser.Maximize();
+    }
 
+    @BeforeTest
+    public void SetUpLoggerBeforeTest(ITestContext testContext) {
         String testCaseName = testContext.getName();
         Log.startLog();
         Log.startTestCase(testCaseName);
-        ExtentManager.createRootNode(testContext.getName());
-    }
-
-//    @BeforeTest
-    public void SetUpLoggerBeforeTest(ITestContext context) {
-        String testCaseName = context.getName();
-        Log.startLog();
-        Log.startTestCase(testCaseName);
-    }
-
-
-    /**
-     * createst for Reporting
-     * @author Huong Trinh
-     * @param method
-     * @return Nothing.
-     * @since 2018-12-03
-     * @see ITestContext
-     */
-    @BeforeMethod
-    public synchronized void createTestForReport(Method method, ITestContext testContext){
-        ExtentManager.createTest(method);
-    }
-
-    /**
-     * create Report
-     * @author Huong Trinh
-     * @param method
-     * @return Nothing.
-     * @since 2018-12-03
-     * @see ITestContext, {@link ITestResult}
-     */
-    @AfterMethod
-    public synchronized void createReport(ITestResult result, Method method, ITestContext testContext){
-        ExtentManager.generateReport(result, method);
     }
 
     /**
@@ -113,22 +73,12 @@ public class BaseTest {
      */
     @AfterTest
     public synchronized void clean(ITestContext testContext){
+        extent.flush();
         String testCaseName = testContext.getName();
         Log.endTestCase(testCaseName);
         Log.info("Closing browser after test");
-        if(null != driver){
-            driver.manage().deleteAllCookies();
-            driver.quit();
-        }
+        Browser.Quit();
     }
-
-//    @AfterTest
-    public void EndingTest(ITestContext context) {
-        String testCaseName = context.getName();
-        Log.endTestCase(testCaseName);
-        Log.info("Closing browser after test");
-    }
-
 
     @AfterSuite
     public void EndingLogAfterSuite() {

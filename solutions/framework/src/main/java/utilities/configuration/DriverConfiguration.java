@@ -9,6 +9,10 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.ITestContext;
+import utilities.configuration.driver.DriverManager;
+import utilities.configuration.driver.DriverManagerFactory;
+import utilities.configuration.driver.DriverType;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -25,6 +29,8 @@ import static io.github.bonigarcia.wdm.DriverManagerType.FIREFOX;
  * @see BasePage
  */
 public class DriverConfiguration {
+    private static DriverManager driverManager;
+    private static WebDriver driver;
 
     /**
      * Set up the driver, define target path where xxdriver will be stored.
