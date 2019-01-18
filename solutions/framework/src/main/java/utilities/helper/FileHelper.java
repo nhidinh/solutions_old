@@ -1,4 +1,4 @@
-package utilities.ultils;
+package utilities.helper;
 
 import org.openqa.selenium.Platform;
 
@@ -33,23 +33,26 @@ public class FileHelper {
                 createDirectory(winPath);
                 break;
             default:
-                System.out.println("File path has not been set! There is a problem!\n");
+                System.out.println("\nFile path has not been set! There is a problem!\n");
                 break;
         }
         return fileLocation;
     }
 
+    /**
+     * @param path
+     */
     //Create the directory path if it does not exist
     public static void createDirectory (String path) {
         File testDirectory = new File(path);
         if (!testDirectory.exists()) {
             if (testDirectory.mkdirs()) {
-                System.out.println("Directory: " + path + " is created!");
+                System.out.println("\nDirectory: " + path + " is created!");
             } else {
-                System.out.println("Failed to create directory: " + path);
+                System.out.println("\nFailed to create directory: " + path);
             }
         }else {
-            System.out.println("Directory already exists: " + path);
+            System.out.println("\nDirectory already exists: " + path);
         }
     }
 
@@ -57,14 +60,11 @@ public class FileHelper {
         if (platform == null) {
             String operSys = System.getProperty("os.name").toLowerCase();
             if (operSys.contains("win")) {
-                //PLATFORM_NAME = "WINDOWS";
                 platform = Platform.WINDOWS;
             } else if (operSys.contains("nix") || operSys.contains("nux")
                     || operSys.contains("aix")) {
-                //PLATFORM_NAME = "LINUX";
                 platform = Platform.LINUX;
             } else if (operSys.contains("mac")) {
-                //PLATFORM_NAME = "MAC";
                 platform = Platform.MAC;
             }
         }

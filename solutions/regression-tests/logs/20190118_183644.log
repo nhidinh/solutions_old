@@ -1,0 +1,137 @@
+2019-01-18 18:36:45,233 INFO  [Log] ********************* START TESTCASE: Portal-SearchByEnrollmentNumberInList********************* 
+2019-01-18 18:36:51,549 INFO  [Log] Setting up Test Data 
+2019-01-18 18:36:51,549 INFO  [Log] Data File Location: D:\Users\dinhn\IdeaProjects\solutions\solutions\regression-tests\src\test\java\com\hansencx\portal\datatest\PortalDataTest.xlsx
+ 
+2019-01-18 18:36:51,549 INFO  [Log] Opening the data file 
+2019-01-18 18:36:51,549 INFO  [Log] Getting Excel File 
+2019-01-18 18:36:52,067 INFO  [Log] Setting Excel File Sheet 
+2019-01-18 18:36:52,069 INFO  [Log] Complete setting Excel File Sheet 
+2019-01-18 18:36:52,125 INFO  [Log] Navigating to https://solutionsportalqa.hansencx.com/Portal/Login.aspx  
+2019-01-18 18:36:52,812 INFO  [Log] End of navigating to https://solutionsportalqa.hansencx.com/Portal/Login.aspx  step 
+2019-01-18 18:36:53,385 INFO  [Log] Start setting text:[QAREQUESTER] element with locator [xpath: //table[contains(@id,'Login')]//input[contains(@id, 'UserName')]]  
+2019-01-18 18:36:53,494 INFO  [Log] End setting text: [QAREQUESTER] element with locator [xpath: //table[contains(@id,'Login')]//input[contains(@id, 'UserName')]]  
+2019-01-18 18:36:53,549 INFO  [Log] Start setting text:[QA!requestor1] element with locator [xpath: //table[contains(@id,'Login')]//input[contains(@id, 'Password')]]  
+2019-01-18 18:36:53,652 INFO  [Log] End setting text: [QA!requestor1] element with locator [xpath: //table[contains(@id,'Login')]//input[contains(@id, 'Password')]]  
+2019-01-18 18:36:53,704 INFO  [Log] Start clicking to element with locator [xpath: //table[contains(@id,'Login')]//input[contains(@id, 'LoginButton')]]  
+2019-01-18 18:36:54,927 INFO  [Log] End clicking to  element with locator [xpath: //table[contains(@id,'Login')]//input[contains(@id, 'LoginButton')]]  
+2019-01-18 18:36:54,936 INFO  [Log] TEST START: Search by Enrollment Number With Filter 'in list'  
+2019-01-18 18:36:55,003 INFO  [Log] Start clicking to element with locator [xpath: //header//a[contains(@id, 'Search')]]  
+2019-01-18 18:36:55,559 INFO  [Log] End clicking to  element with locator [xpath: //header//a[contains(@id, 'Search')]]  
+2019-01-18 18:36:56,271 INFO  [Log] Start setting text:[1] element with locator [xpath: //*[contains(@data-bind,"EnrollmentNumber.Value")]]  
+2019-01-18 18:36:56,372 INFO  [Log] End setting text: [1] element with locator [xpath: //*[contains(@data-bind,"EnrollmentNumber.Value")]]  
+2019-01-18 18:36:56,432 INFO  [Log] Start clicking to element with locator [id: SearchButton]  
+2019-01-18 18:36:56,571 INFO  [Log] End clicking to  element with locator [id: SearchButton]  
+2019-01-18 18:36:57,409 ERROR [Log] java.lang.AssertionError: did not expect to find [2] but found [1] 
+2019-01-18 18:36:57,793 INFO  [Log] ********************* END OF TEST CASE: Portal-SearchByEnrollmentNumberInList********************* 
+2019-01-18 18:36:57,793 INFO  [Log] Closing browser after test 
+2019-01-18 18:36:58,500 INFO  [Log] TEST COMPLETED - REPORT IS UPDATED 
+2019-01-18 18:36:58,513 INFO  [Log] ********************* START TESTCASE: Portal-Search by Enrollment Number with Data File********************* 
+2019-01-18 18:37:02,292 INFO  [Log] Setting up Test Data 
+2019-01-18 18:37:02,292 INFO  [Log] Data File Location: D:\Users\dinhn\IdeaProjects\solutions\solutions\regression-tests\src\test\java\com\hansencx\portal\datatest\PortalDataTest.xlsx
+ 
+2019-01-18 18:37:02,292 INFO  [Log] Opening the data file 
+2019-01-18 18:37:02,292 INFO  [Log] Getting Excel File 
+2019-01-18 18:37:02,322 INFO  [Log] Setting Excel File Sheet 
+2019-01-18 18:37:02,323 INFO  [Log] Complete setting Excel File Sheet 
+2019-01-18 18:37:02,324 INFO  [Log] Navigating to https://solutionsportalqa.hansencx.com/Portal/Login.aspx  
+2019-01-18 18:37:02,793 INFO  [Log] End of navigating to https://solutionsportalqa.hansencx.com/Portal/Login.aspx  step 
+2019-01-18 18:37:03,380 INFO  [Log] Start setting text:[QAREQUESTER] element with locator [xpath: //table[contains(@id,'Login')]//input[contains(@id, 'UserName')]]  
+2019-01-18 18:37:03,539 INFO  [Log] End setting text: [QAREQUESTER] element with locator [xpath: //table[contains(@id,'Login')]//input[contains(@id, 'UserName')]]  
+2019-01-18 18:37:03,606 INFO  [Log] Start setting text:[QA!requestor1] element with locator [xpath: //table[contains(@id,'Login')]//input[contains(@id, 'Password')]]  
+2019-01-18 18:37:03,755 INFO  [Log] End setting text: [QA!requestor1] element with locator [xpath: //table[contains(@id,'Login')]//input[contains(@id, 'Password')]]  
+2019-01-18 18:37:03,816 INFO  [Log] Start clicking to element with locator [xpath: //table[contains(@id,'Login')]//input[contains(@id, 'LoginButton')]]  
+2019-01-18 18:37:04,844 INFO  [Log] End clicking to  element with locator [xpath: //table[contains(@id,'Login')]//input[contains(@id, 'LoginButton')]]  
+2019-01-18 18:37:04,845 INFO  [Log] TEST START: Search by Enrollment Number with Data File 
+2019-01-18 18:37:04,845 INFO  [Log] Getting cell index by text: Filter 
+2019-01-18 18:37:04,871 INFO  [Log] Found Cell with column index: 1 
+2019-01-18 18:37:04,871 INFO  [Log] Getting cell index by text: Value 
+2019-01-18 18:37:04,871 INFO  [Log] Found Cell with column index: 2 
+2019-01-18 18:37:04,871 INFO  [Log] Getting cell index by text: TestCaseName 
+2019-01-18 18:37:04,872 INFO  [Log] Found Cell with column index: 0 
+2019-01-18 18:37:04,872 INFO  [Log] Getting cell index by text: Result 
+2019-01-18 18:37:04,872 INFO  [Log] Found Cell with column index: 3 
+2019-01-18 18:37:04,872 INFO  [Log] Getting Cell Data... 
+2019-01-18 18:37:04,872 INFO  [Log] Return Cell Data Value: equals 
+2019-01-18 18:37:04,873 INFO  [Log] Getting Cell Data... 
+2019-01-18 18:37:04,885 INFO  [Log] Return Cell Data Value: 1.0 
+2019-01-18 18:37:04,887 INFO  [Log] Getting Cell Data... 
+2019-01-18 18:37:04,887 INFO  [Log] Return Cell Data Value: SearchWithEnrollmentNumberByEquals 
+2019-01-18 18:37:04,887 INFO  [Log] Getting Cell Data... 
+2019-01-18 18:37:04,888 INFO  [Log] Return Cell Data Value: 1.0 
+2019-01-18 18:37:04,947 INFO  [Log] Start clicking to element with locator [xpath: //header//a[contains(@id, 'Search')]]  
+2019-01-18 18:37:05,401 INFO  [Log] End clicking to  element with locator [xpath: //header//a[contains(@id, 'Search')]]  
+2019-01-18 18:37:06,149 INFO  [Log] Start setting text:[1] element with locator [xpath: //*[contains(@data-bind,"EnrollmentNumber.Value")]]  
+2019-01-18 18:37:06,269 INFO  [Log] End setting text: [1] element with locator [xpath: //*[contains(@data-bind,"EnrollmentNumber.Value")]]  
+2019-01-18 18:37:06,324 INFO  [Log] Start clicking to element with locator [id: SearchButton]  
+2019-01-18 18:37:06,436 INFO  [Log] End clicking to  element with locator [id: SearchButton]  
+2019-01-18 18:37:06,970 WARN  [Log] Failed at case: SearchWithEnrollmentNumberByEquals 
+2019-01-18 18:37:06,970 WARN  [Log] did not expect to find [1] but found [0] 
+2019-01-18 18:37:06,970 INFO  [Log] Complete Test case: SearchWithEnrollmentNumberByEquals 
+2019-01-18 18:37:06,970 INFO  [Log] Getting Cell Data... 
+2019-01-18 18:37:06,971 INFO  [Log] Return Cell Data Value: begins with 
+2019-01-18 18:37:06,971 INFO  [Log] Getting Cell Data... 
+2019-01-18 18:37:06,971 INFO  [Log] Return Cell Data Value: 1.0 
+2019-01-18 18:37:06,971 INFO  [Log] Getting Cell Data... 
+2019-01-18 18:37:06,971 INFO  [Log] Return Cell Data Value: SearchWithEnrollmentNumberByBeginsWith 
+2019-01-18 18:37:06,972 INFO  [Log] Getting Cell Data... 
+2019-01-18 18:37:06,972 INFO  [Log] Return Cell Data Value: 24.0 
+2019-01-18 18:37:07,011 INFO  [Log] Start clicking to element with locator [xpath: //header//a[contains(@id, 'Search')]]  
+2019-01-18 18:37:07,660 INFO  [Log] End clicking to  element with locator [xpath: //header//a[contains(@id, 'Search')]]  
+2019-01-18 18:37:08,367 INFO  [Log] Start setting text:[1] element with locator [xpath: //*[contains(@data-bind,"EnrollmentNumber.Value")]]  
+2019-01-18 18:37:08,455 INFO  [Log] End setting text: [1] element with locator [xpath: //*[contains(@data-bind,"EnrollmentNumber.Value")]]  
+2019-01-18 18:37:08,498 INFO  [Log] Start clicking to element with locator [id: SearchButton]  
+2019-01-18 18:37:08,609 INFO  [Log] End clicking to  element with locator [id: SearchButton]  
+2019-01-18 18:37:09,131 INFO  [Log] Complete Test case: SearchWithEnrollmentNumberByBeginsWith 
+2019-01-18 18:37:09,131 INFO  [Log] Getting Cell Data... 
+2019-01-18 18:37:09,132 INFO  [Log] Return Cell Data Value: contains 
+2019-01-18 18:37:09,132 INFO  [Log] Getting Cell Data... 
+2019-01-18 18:37:09,132 INFO  [Log] Return Cell Data Value: 100003.0 
+2019-01-18 18:37:09,133 INFO  [Log] Getting Cell Data... 
+2019-01-18 18:37:09,133 INFO  [Log] Return Cell Data Value: SearchWithEnrollmentNumberByContains 
+2019-01-18 18:37:09,133 INFO  [Log] Getting Cell Data... 
+2019-01-18 18:37:09,133 INFO  [Log] Return Cell Data Value: 400.0 
+2019-01-18 18:37:09,190 INFO  [Log] Start clicking to element with locator [xpath: //header//a[contains(@id, 'Search')]]  
+2019-01-18 18:37:09,610 INFO  [Log] End clicking to  element with locator [xpath: //header//a[contains(@id, 'Search')]]  
+2019-01-18 18:37:10,395 INFO  [Log] Start setting text:[100003] element with locator [xpath: //*[contains(@data-bind,"EnrollmentNumber.Value")]]  
+2019-01-18 18:37:10,519 INFO  [Log] End setting text: [100003] element with locator [xpath: //*[contains(@data-bind,"EnrollmentNumber.Value")]]  
+2019-01-18 18:37:10,554 INFO  [Log] Start clicking to element with locator [id: SearchButton]  
+2019-01-18 18:37:10,631 INFO  [Log] End clicking to  element with locator [id: SearchButton]  
+2019-01-18 18:37:11,158 WARN  [Log] Failed at case: SearchWithEnrollmentNumberByContains 
+2019-01-18 18:37:11,158 WARN  [Log] did not expect to find [400] but found [5] 
+2019-01-18 18:37:11,158 INFO  [Log] Complete Test case: SearchWithEnrollmentNumberByContains 
+2019-01-18 18:37:11,158 INFO  [Log] Getting Cell Data... 
+2019-01-18 18:37:11,158 INFO  [Log] Return Cell Data Value: ends with 
+2019-01-18 18:37:11,159 INFO  [Log] Getting Cell Data... 
+2019-01-18 18:37:11,159 INFO  [Log] Return Cell Data Value: 1.0 
+2019-01-18 18:37:11,159 INFO  [Log] Getting Cell Data... 
+2019-01-18 18:37:11,159 INFO  [Log] Return Cell Data Value: SearchWithEnrollmentNumberByEndsWith 
+2019-01-18 18:37:11,159 INFO  [Log] Getting Cell Data... 
+2019-01-18 18:37:11,159 INFO  [Log] Return Cell Data Value: 4.0 
+2019-01-18 18:37:11,209 INFO  [Log] Start clicking to element with locator [xpath: //header//a[contains(@id, 'Search')]]  
+2019-01-18 18:37:11,709 INFO  [Log] End clicking to  element with locator [xpath: //header//a[contains(@id, 'Search')]]  
+2019-01-18 18:37:12,401 INFO  [Log] Start setting text:[1] element with locator [xpath: //*[contains(@data-bind,"EnrollmentNumber.Value")]]  
+2019-01-18 18:37:12,473 INFO  [Log] End setting text: [1] element with locator [xpath: //*[contains(@data-bind,"EnrollmentNumber.Value")]]  
+2019-01-18 18:37:12,515 INFO  [Log] Start clicking to element with locator [id: SearchButton]  
+2019-01-18 18:37:12,605 INFO  [Log] End clicking to  element with locator [id: SearchButton]  
+2019-01-18 18:37:13,132 INFO  [Log] Complete Test case: SearchWithEnrollmentNumberByEndsWith 
+2019-01-18 18:37:13,132 INFO  [Log] Getting Cell Data... 
+2019-01-18 18:37:13,132 INFO  [Log] Return Cell Data Value: in list 
+2019-01-18 18:37:13,133 INFO  [Log] Getting Cell Data... 
+2019-01-18 18:37:13,133 INFO  [Log] Return Cell Data Value: 1.0 
+2019-01-18 18:37:13,133 INFO  [Log] Getting Cell Data... 
+2019-01-18 18:37:13,133 INFO  [Log] Return Cell Data Value: SearchWithEnrollmentNumberByInlist 
+2019-01-18 18:37:13,133 INFO  [Log] Getting Cell Data... 
+2019-01-18 18:37:13,133 INFO  [Log] Return Cell Data Value: 1.0 
+2019-01-18 18:37:13,174 INFO  [Log] Start clicking to element with locator [xpath: //header//a[contains(@id, 'Search')]]  
+2019-01-18 18:37:13,576 INFO  [Log] End clicking to  element with locator [xpath: //header//a[contains(@id, 'Search')]]  
+2019-01-18 18:37:14,200 INFO  [Log] Start setting text:[1] element with locator [xpath: //*[contains(@data-bind,"EnrollmentNumber.Value")]]  
+2019-01-18 18:37:14,260 INFO  [Log] End setting text: [1] element with locator [xpath: //*[contains(@data-bind,"EnrollmentNumber.Value")]]  
+2019-01-18 18:37:14,298 INFO  [Log] Start clicking to element with locator [id: SearchButton]  
+2019-01-18 18:37:14,379 INFO  [Log] End clicking to  element with locator [id: SearchButton]  
+2019-01-18 18:37:14,894 INFO  [Log] Complete Test case: SearchWithEnrollmentNumberByInlist 
+2019-01-18 18:37:14,895 INFO  [Log] TEST PASS: Search by Enrollment Number with Data File 
+2019-01-18 18:37:14,940 INFO  [Log] ********************* END OF TEST CASE: Portal-Search by Enrollment Number with Data File********************* 
+2019-01-18 18:37:14,940 INFO  [Log] Closing browser after test 
+2019-01-18 18:37:15,648 INFO  [Log] TEST COMPLETED - REPORT IS UPDATED 
+2019-01-18 18:37:15,649 INFO  [Log] ENDING SUITE 
+2019-01-18 18:37:15,649 INFO  [Log] End Log... 

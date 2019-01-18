@@ -7,12 +7,16 @@ import com.aventstack.extentreports.MediaEntityModelProvider;
 import com.hansencx.solutions.core.BaseTest;
 import com.hansencx.solutions.logger.Log;
 import com.hansencx.solutions.reporting.extentreports.ExtentManager;
+import com.sun.org.apache.xml.internal.security.Init;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import utilities.helper.screenshot.ScreenCaptor;
 
 import java.io.IOException;
+
+import static org.apache.commons.io.FilenameUtils.separatorsToSystem;
 
 /**
  * @param
@@ -35,7 +39,6 @@ public class TestListener implements ITestListener {
 
     @Override
     public synchronized void onFinish(ITestContext context) {
-//        extent.flush();
         message = "TEST COMPLETED - REPORT IS UPDATED";
         Log.info(message);
     }
@@ -68,8 +71,12 @@ public class TestListener implements ITestListener {
         try {
             ITestContext context = result.getTestContext();
             driver = (WebDriver) context.getAttribute("driver");
-            String base64Screenshot = ExtentManager.getBase64Screenshot(driver, result.getName());
-            MediaEntityModelProvider mediaModel = MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build();
+
+            String screenshotName = result.getName() +"_"+ InitialData.TIMESTAMP;
+            String screenshotDirectory = separatorsToSystem(ExtentManager.getReportDirectory() + "\\FailedTestsScreenshots\\") ;
+            String encodedScreenshot = ScreenCaptor.takeBase64Screenshot(driver,screenshotName,screenshotDirectory );
+
+            MediaEntityModelProvider mediaModel = MediaEntityBuilder.createScreenCaptureFromBase64String(encodedScreenshot).build();
             test.get().fail("image:", mediaModel);
         } catch (IOException e) {
             Log.error(e.getMessage());
@@ -92,8 +99,5 @@ public class TestListener implements ITestListener {
 
     private String setMessage(String status, String description){
         return  "TEST "+status+": " + description;
-    }
-    public static void setTestStatus(ITestResult iTestResult, int status){
-        iTestResult.setStatus(2);
     }
 }

@@ -28,8 +28,7 @@ public class InitialData {
     private static String FILE_NAME_LOG = TIMESTAMP + ".log";
     public static String LOG_DIR_PATH = PARENT_DIR+"\\solutions\\regression-tests\\logs";
     public static String LOG_FILE_PATH = LOG_DIR_PATH + "/" + FILE_NAME_LOG;
-    public static String LOG_CONFIG_FILE_PATH = "./framework/src/main/java/com/hansencx/solutions/util/logger/log4j.xml";
-
+    public static String LOG_CONFIG_FILE_PATH = "./framework/src/main/resources/log4j.xml";
     //REPORT DIRECTORY PATH
     public static String FILE_NAME_REPORT = "REPORT-"+TIMESTAMP+".html";
     public static String REPORT_DIR_PATH = PARENT_DIR+ "\\solutions\\regression-tests\\reports" + "\\Report-"+TIMESTAMP;

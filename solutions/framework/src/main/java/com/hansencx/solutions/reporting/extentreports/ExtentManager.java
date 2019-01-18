@@ -2,25 +2,19 @@ package com.hansencx.solutions.reporting.extentreports;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.MediaEntityBuilder;
-import com.aventstack.extentreports.MediaEntityModelProvider;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
-import com.hansencx.solutions.logger.Log;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.testng.ITestContext;
-import org.testng.ITestResult;
 import utilities.configuration.InitialData;
-import utilities.ultils.FileHelper;
+import utilities.helper.FileHelper;
 import org.apache.commons.codec.binary.Base64;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.Method;
 
 import static org.apache.commons.io.FilenameUtils.separatorsToSystem;
 
@@ -59,7 +53,6 @@ public class ExtentManager {
     /**
      * Create instance of ExtentHtmlReporter, load extent-config.xml file
      * @author Huong Trinh
-     * @param
      * @return ExtentReport object
      * @since   03.01.2019
      */
@@ -114,6 +107,17 @@ public class ExtentManager {
     }
 
     /**
+     * Get Report Directory Path
+     * @author Nhi Dinh
+     * @return String
+     * @since   18.01.2019
+     */
+
+    public static String getReportDirectory(){
+        return reportDir_path;
+    }
+
+    /**
      * setReportFileName
      * @author Nhi Dinh
      * @return String
@@ -125,26 +129,4 @@ public class ExtentManager {
         String reportFile_path = separatorsToSystem(InitialData.REPORT_FILE_PATH);
         return reportFile_path;
     }
-
-    public static String getBase64Screenshot(WebDriver driver, String screenshotName) throws IOException {
-        String encodedBase64 = null;
-        FileInputStream fileInputStream = null;
-        TakesScreenshot screenshot = (TakesScreenshot) driver;
-        File source = screenshot.getScreenshotAs(OutputType.FILE);
-        String destination = reportDir_path + "\\FailedTestsScreenshots\\" + screenshotName + InitialData.TIMESTAMP + ".png";
-        File finalDestination = new File(destination);
-        FileUtils.copyFile(source, finalDestination);
-
-        try {
-            fileInputStream = new FileInputStream(finalDestination);
-            byte[] bytes = new byte[(int) finalDestination.length()];
-            fileInputStream.read(bytes);
-            encodedBase64 = new String(Base64.encodeBase64(bytes));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return encodedBase64;
-    }
-
 }

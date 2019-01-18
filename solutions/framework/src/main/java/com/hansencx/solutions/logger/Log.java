@@ -1,7 +1,8 @@
 package com.hansencx.solutions.logger;
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
-import utilities.ultils.FileHelper;
+import utilities.helper.FileHelper;
 import utilities.configuration.InitialData;
 
 import static org.apache.commons.io.FilenameUtils.separatorsToSystem;
@@ -21,6 +22,7 @@ public class Log {
     public static void initLogger() {
         System.out.println("Setting Log File Location...");
         setLogFileLocation();
+        getLog4jConfigurationFile();
         log = Logger.getLogger(Log.class.getName());
     }
 
@@ -39,8 +41,6 @@ public class Log {
 
     public static void startLog() {
         initLogger();
-        log.info("Start Log...");
-        System.out.println("Start Log...");
     }
 
     public static void endLog() {

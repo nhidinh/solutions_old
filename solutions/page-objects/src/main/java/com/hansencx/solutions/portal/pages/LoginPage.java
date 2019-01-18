@@ -5,6 +5,7 @@ import com.hansencx.solutions.portal.utilities.Links;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import utilities.helper.StringEncrypt;
 
 public class LoginPage extends BasePage {
     public LoginPage(WebDriver driver){
@@ -46,7 +47,12 @@ public class LoginPage extends BasePage {
         setTextPassword(password);
         clickLogonButton();
     }
+
+    public void LogonWithEncodedCredential(String username, String encodedPassword){
+        String key = "encodedPassword";
+        String password = StringEncrypt.decryptXOR(encodedPassword, key);
+        System.out.println("Password decoded: "+ password);
+        LogonWithUsername(username, password);
+    }
     public void VerifyLogonSuccessfully(){}
-
-
 }

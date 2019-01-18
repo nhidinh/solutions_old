@@ -26,11 +26,12 @@ public class PortalBaseTest extends BaseTest {
 
 
      @BeforeClass
-    @Parameters({"username", "password"})
-    public void LoginBeforeTest(String username, String password, ITestContext testContext){
+    @Parameters({"username", "encodedPassword"})
+    public void LoginBeforeTest(String username, String encodedPassword, ITestContext testContext){
          if(!testContext.getName().contains("Login Test")){
              LoginPage loginPage = Page.Login().Goto();
-             loginPage.LogonWithUsername(username, password);
+//             loginPage.LogonWithUsername(username, password);
+             loginPage.LogonWithEncodedCredential(username, encodedPassword);
          }
      }
 }

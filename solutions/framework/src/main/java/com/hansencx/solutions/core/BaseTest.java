@@ -8,7 +8,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 import com.hansencx.solutions.logger.Log;
 import utilities.configuration.driver.DriverType;
-import utilities.ultils.Browser;
+import utilities.helper.Browser;
 
 import java.net.MalformedURLException;
 

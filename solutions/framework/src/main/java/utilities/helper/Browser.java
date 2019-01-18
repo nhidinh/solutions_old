@@ -1,6 +1,5 @@
-package utilities.ultils;
+package utilities.helper;
 
-import io.github.bonigarcia.wdm.DriverManagerType;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import utilities.configuration.driver.DriverManager;
