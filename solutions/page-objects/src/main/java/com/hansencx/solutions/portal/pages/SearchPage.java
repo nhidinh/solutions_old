@@ -47,7 +47,7 @@ public class SearchPage extends BasePage {
     }
 
     //ACTIONS
-    public void SearchByEnrollmentNumberWithFilter(String option, String enrollNumber){
+    public void searchByEnrollmentNumberWithFilter(String option, String enrollNumber){
         selectEnrollmentNumberFilterOption(option);
         setTextEnrollmentNumber(enrollNumber);
     }

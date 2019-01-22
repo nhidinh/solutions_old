@@ -12,9 +12,14 @@ import org.openqa.selenium.WebElement;
  * @since 04/01/2019
  */
 public class JavaScriptHelper {
-    public void executeJS(String javascript, WebElement element, WebDriver driver){
+    public static void executeJSWithElement(String javascript, WebElement element, WebDriver driver){
         JavascriptExecutor executor = (JavascriptExecutor)driver;
         executor.executeScript(javascript, element);
+    }
+
+    public static void executeJS(String javascript, WebDriver driver){
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        executor.executeScript(javascript);
     }
     public static String getJsDndHelper() {
         return "var target = arguments[0]," +

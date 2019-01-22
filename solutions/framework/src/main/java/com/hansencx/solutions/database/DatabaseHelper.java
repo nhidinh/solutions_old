@@ -56,7 +56,7 @@ public class DatabaseHelper {
     }
 
     /**
-     * Close the connection to database.
+     * close the connection to database.
      * @author Vi Nguyen
      * @param
      * @return Nothing.

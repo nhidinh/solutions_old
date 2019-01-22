@@ -1,19 +1,19 @@
 package com.hansencx.solutions.core;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.testng.Assert;
 import com.hansencx.solutions.logger.Log;
+import utilities.helper.JavaScriptHelper;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
-
+//import com.google.common.base.Function;
+import java.util.function.Function;
 /**
  * BasePage class
  * All Page objects created should inherit this class
@@ -23,7 +23,7 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.*;
  * @since   2018-12-03
  */
 public class BasePage {
-    private static final int TIMEOUT = 10; //seconds
+    private static final int TIMEOUT = 30; //seconds
     private static final int POLLING = 100; //milliseconds
 
     protected WebDriver driver;
@@ -62,9 +62,6 @@ public class BasePage {
         return "End " + action + " " + value + " element with locator " + elementLocator + " " + tail;
     }
 
-    public void verifyElementPresent(WebElement element){
-        Assert.assertEquals(true, element.isDisplayed());
-    }
 
     public void navigateToPage(String url){
         Log.info("Navigating to " + url);
@@ -99,6 +96,28 @@ public class BasePage {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", ele);
         Log.info(setEndMessage("clicking (JS) to", "", elementLocator, ""));
+    }
+
+    /**
+     * Click on given element
+     * @author Vi Nguyen
+     * @param element the given web element
+     * @return Nothing
+     * @since 2018-12-03
+     * @see
+     */
+    public void click(WebElement element){
+        String elementLocator = getLocatorOfElement(element);
+        try {
+            waitForElementToAppear(element);
+            Log.info(setStartMessage("clicking to", "", elementLocator, ""));
+            element.click();
+            Log.info(setEndMessage("clicking to", "", elementLocator, ""));
+        }catch (Exception e){
+            Log.error("Unable to click element at: " + elementLocator);
+            Log.error(e.getMessage());
+            System.out.println(e.getMessage());
+        }
     }
 
     // Set Text
@@ -146,16 +165,14 @@ public class BasePage {
 
     //Wait for page load
     public void waitForPageLoad(){
-        ExpectedCondition<Boolean> expectation = new
-                ExpectedCondition<Boolean>() {
-                    public Boolean apply(WebDriver driver) {
-                        return ((JavascriptExecutor) driver).executeScript("return document.readyState").toString().equals("complete");
-                    }
-                };
+        Function<WebDriver, Boolean> functionWaitForPageLoad  = new Function<WebDriver, Boolean>() {
+            public Boolean apply( WebDriver driver) {
+                return ((JavascriptExecutor) driver).executeScript("return document.readyState").toString().equals("complete");
+            }
+        };
         try {
             Thread.sleep(500);
-            WebDriverWait wait = new WebDriverWait(driver, 30);
-            wait.until(expectation);
+            wait.until(functionWaitForPageLoad);
         } catch (Exception error) {
             Log.error(error.getMessage());
             Assert.fail("Timeout waiting for Page Load Request to complete.");
@@ -167,8 +184,14 @@ public class BasePage {
      * @param locator the locator.
      * @return Nothing.
      */
-    public void waitForElementToAppear(By locator) {
-        wait.until(visibilityOfElementLocated(locator));
+    public WebElement waitForElementToAppear(By locator) {
+        Function<WebDriver, WebElement> functionWait = new Function<WebDriver, WebElement>() {
+            @Override
+            public WebElement apply(WebDriver driver) {
+                return driver.findElement(locator);
+            }
+        };
+        return wait.until(functionWait);
     }
 
     /**
@@ -177,7 +200,13 @@ public class BasePage {
      * @return Nothing.
      */
     public void waitForElementToAppear(WebElement element){
-        wait.until(visibilityOf(element));
+        Function<WebDriver, Boolean> function = new Function<WebDriver, Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                return element.isDisplayed() ? true : null;
+            }
+        };
+        wait.until(function);
 }
 
     /**
@@ -188,20 +217,23 @@ public class BasePage {
      * @see
      */
     public void waitForElementToDisappear(WebElement element){
-        wait.until(invisibilityOf(element));
+        Function<WebDriver, Boolean> invisibility = new Function<WebDriver, Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                try {
+                    return !element.isDisplayed();
+                } catch (StaleElementReferenceException var2) {
+                    return true;
+                }
+            }
+        };
+        wait.until(invisibility);
     }
 
-    /**
-     * Wait for element is clickable
-     * @author Vi Nguyen
-     * @param element the given web element
-     * @return Nothing
-     * @since 2018-12-03
-     * @see
-     */
-    public void waitForTextToDisappearInElement(WebElement element, String text){
-        wait.until(not(textToBePresentInElement(element, text)));
+    public void verifyElementPresent(WebElement element){
+        Assert.assertTrue(element.isDisplayed());
     }
+
 
     /**
      * Wait for element is clickable
@@ -212,48 +244,23 @@ public class BasePage {
      * @see
      */
     public void waitForElementToBeClickable(WebElement element){
-        wait.until(visibilityOf(element));
-    }
-
-    /**
-     * Wait for element is clickable
-     * @author Vi Nguyen
-     * @param element the given web element
-     * @return Nothing
-     * @since 2018-12-03
-     * @see
-     */
-    public void waitForElementIsClickable(WebElement element){
         String elementLocator = getLocatorOfElement(element) ;
         Log.info(setStartMessage("waiting for","", elementLocator, "is clickable"));
-        wait.until(elementToBeClickable(element));
-        Log.info(setEndMessage("waiting for","",elementLocator ,"is clickable"));
-    }
-    /**
-     * Click on given element
-     * @author Vi Nguyen
-     * @param element the given web element
-     * @return Nothing
-     * @since 2018-12-03
-     * @see
-     */
-    public void click(WebElement element){
-        String elementLocator = getLocatorOfElement(element);
-        try {
-            waitForElementToAppear(element);
-            Log.info(setStartMessage("clicking to", "", elementLocator, ""));
-            element.click();
-            Log.info(setEndMessage("clicking to", "", elementLocator, ""));
-        }catch (Exception e){
-            Log.error("Unable to click element at: " + elementLocator);
-            Log.error(e.getMessage());
-            System.out.println(e.getMessage());
-        }
-    }
 
-    public boolean isElementPresent(WebElement element){
-        String elementLocator = getLocatorOfElement(element) ;
-        Log.info(setStartMessage("checking for","", elementLocator, "is presented"));
-        return element.isDisplayed();
+        Function<WebDriver, Boolean> clickable = new Function<WebDriver, Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                waitForElementToAppear(element);
+                try {
+                    return element != null && element.isEnabled() ? true : null;
+                } catch (StaleElementReferenceException var4) {
+                    return null;
+                }
+            }
+        };
+        wait.until(visibilityOf(element));
+
+        Log.info(setEndMessage("waiting for","",elementLocator ,"is clickable"));
+
     }
 }

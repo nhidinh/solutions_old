@@ -16,17 +16,17 @@ import utilities.helper.FailureHandling;
  */
 
 
-public class Search_Tests extends PortalBaseTest {
+public class SearchTests extends PortalBaseTest {
     @Test(description = "Search by Enrollment Number With Filter 'in list' ")
-    public void SearchByEnrollmentNumberInList(){
+    public void searchByEnrollmentNumberInList(){
         Page.TopNavigation().clickSearchButton();
-        Page.Search().SearchByEnrollmentNumberWithFilter("in list", "1");
+        Page.Search().searchByEnrollmentNumberWithFilter("in list", "1");
         Page.Search().clickSearchButton();
-        Assert.assertEquals(Page.SearchResult().GetNumberOfResult(),2 );
+        Assert.assertEquals(Page.SearchResult().getNumberOfResult(),2 );
     }
 
     @BeforeTest
-    public void SetUpTestData(){
+    public void setUpTestData(){
         String DataDirectory = "D:\\Users\\dinhn\\IdeaProjects\\solutions\\solutions\\regression-tests\\src\\test\\java\\com\\hansencx\\portal\\datatest\\";
         String DataFileName = "PortalDataTest.xlsx";
         String SheetName = "EnrollmentNumber";
@@ -34,7 +34,7 @@ public class Search_Tests extends PortalBaseTest {
     }
 
     @Test(description = "Search by Enrollment Number with Data File")
-    public void SearchByEnrollmentNumberWithDataFile(){
+    public void searchByEnrollmentNumberWithDataFile(){
         int countRow = ExcelHelper.getNumberOfRow();
         String testcaseName;
         String filterOption;
@@ -56,13 +56,13 @@ public class Search_Tests extends PortalBaseTest {
             if(filterOption.equals("contains")){
                 Page.Search().selectSupplierByName("Talen Energy Electric");
             }
-            Page.Search().SearchByEnrollmentNumberWithFilter(filterOption, enrollmentNumberValue);
+            Page.Search().searchByEnrollmentNumberWithFilter(filterOption, enrollmentNumberValue);
             Page.Search().clickSearchButton();
-            int numberOfResult = Page.SearchResult().GetNumberOfResult();
+            int numberOfResult = Page.SearchResult().getNumberOfResult();
             try {
                 Assert.assertEquals(numberOfResult, resultValue);
             }catch (AssertionError e){
-                FailureHandling.ContinueAtFailedTestCase(e, testcaseName);
+                FailureHandling.continueAtFailedTestCase(e, testcaseName);
             }
             Log.info("Complete Test case: "+ testcaseName);
             System.out.println("Compete Test case: " + testcaseName);

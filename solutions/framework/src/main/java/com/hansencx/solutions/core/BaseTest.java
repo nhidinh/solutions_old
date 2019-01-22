@@ -32,19 +32,18 @@ public class BaseTest {
         return driver;
     }
 
-
-    @BeforeSuite
-    public void SettingReportBeforeSuite(ITestContext iTestContext){
+    @BeforeSuite(description = "Setting Report Before Suite")
+    public void settingReportBeforeSuite(ITestContext iTestContext){
         extent = ExtentManager.getInstance();
         String suiteName = iTestContext.getCurrentXmlTest().getSuite().getName();
         ExtentManager.createRootNode(extent, suiteName);
     }
 
     @Parameters({"browser","mode"})
-    @BeforeTest
+    @BeforeTest (description = "Set Up Browser")
     public void setUp(final DriverType browser, final String mode, ITestContext testContext){
         if(mode.equals("NonRemote")){
-            Browser.Setup(browser, testContext);
+            Browser.setup(browser, testContext);
             driver = (WebDriver) testContext.getAttribute("driver");
         }else if(mode.equals("Remote")){
             try {
@@ -53,35 +52,35 @@ public class BaseTest {
                 e.printStackTrace();
             }
         }
-        Browser.Maximize();
+        Browser.maximize();
     }
 
-    @BeforeTest
-    public void SetUpLoggerBeforeTest(ITestContext testContext) {
+    @BeforeTest (description = "Set Up Logger Before Test")
+    public void setUpLoggerBeforeTest(ITestContext testContext) {
         String testCaseName = testContext.getName();
         Log.startLog();
         Log.startTestCase(testCaseName);
     }
 
     /**
-     * Quit driver after running a test suite
+     * quit driver after running a test suite
      * @author Huong Trinh
      * @param
      * @return Nothing.
      * @since 2018-12-03
      * @see ITestContext
      */
-    @AfterTest
+    @AfterTest (description = "Clean Session")
     public synchronized void clean(ITestContext testContext){
         extent.flush();
         String testCaseName = testContext.getName();
         Log.endTestCase(testCaseName);
         Log.info("Closing browser after test");
-        Browser.Quit();
+        Browser.quit();
     }
 
-    @AfterSuite
-    public void EndingLogAfterSuite() {
+    @AfterSuite (description = "Ending Log After Suite")
+    public void endingLogAfterSuite() {
         Log.info("ENDING SUITE");
         Log.endLog();
     }

@@ -11,9 +11,9 @@
 
     <test name = "Portal-SearchByEnrollmentNumberInList" >
        <classes>
-           <class name="com.hansencx.portal.tests.Search_Tests">
+           <class name="com.hansencx.portal.tests.SearchTests">
                <methods>
-                   <include name="SearchByEnrollmentNumberInList"/>
+                   <include name="searchByEnrollmentNumberInList"/>
                </methods>
            </class>
        </classes>
@@ -21,9 +21,9 @@
 
     <test name = "Portal-Search by Enrollment Number with Data File" enabled="true">
         <classes>
-            <class name="com.hansencx.portal.tests.Search_Tests">
+            <class name="com.hansencx.portal.tests.SearchTests">
                 <methods>
-                    <include name="SearchByEnrollmentNumberWithDataFile"/>
+                    <include name="searchByEnrollmentNumberWithDataFile"/>
                 </methods>
             </class>
         </classes>

@@ -2,7 +2,7 @@ package com.hansencx.solutions.portal;
 
 import com.hansencx.solutions.core.BaseTest;
 import com.hansencx.solutions.portal.pages.LoginPage;
-import com.hansencx.solutions.portal.utilities.Portal_PageGenerator;
+import com.hansencx.solutions.portal.utilities.PortalPageGenerator;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
@@ -17,11 +17,11 @@ import org.testng.annotations.Parameters;
 
 
 public class PortalBaseTest extends BaseTest {
-     public Portal_PageGenerator Page;
+     public PortalPageGenerator Page;
 
      @BeforeTest
     public void SetPage(){
-         Page = new Portal_PageGenerator(getDriver());
+         Page = new PortalPageGenerator(getDriver());
      }
 
 
@@ -29,9 +29,9 @@ public class PortalBaseTest extends BaseTest {
     @Parameters({"username", "encodedPassword"})
     public void LoginBeforeTest(String username, String encodedPassword, ITestContext testContext){
          if(!testContext.getName().contains("Login Test")){
-             LoginPage loginPage = Page.Login().Goto();
-//             loginPage.LogonWithUsername(username, password);
-             loginPage.LogonWithEncodedCredential(username, encodedPassword);
+             LoginPage loginPage = Page.Login().goTo();
+//             loginPage.logonWithUsername(username, password);
+             loginPage.logonWithEncodedCredential(username, encodedPassword);
          }
      }
 }

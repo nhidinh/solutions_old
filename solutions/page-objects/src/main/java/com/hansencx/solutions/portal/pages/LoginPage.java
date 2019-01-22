@@ -37,22 +37,21 @@ public class LoginPage extends BasePage {
     }
 
     //ACTIONS
-    public LoginPage Goto(){
+    public LoginPage goTo(){
         navigateToPage(Links.URL_LOGIN);
         return new LoginPage(driver);
     }
-    public void LogonWithUsername(String username, String password){
+    public void logonWithUsername(String username, String password){
         waitForPageLoad();
         setTextUsername(username);
         setTextPassword(password);
         clickLogonButton();
     }
 
-    public void LogonWithEncodedCredential(String username, String encodedPassword){
+    public void logonWithEncodedCredential(String username, String encodedPassword){
         String key = "encodedPassword";
         String password = StringEncrypt.decryptXOR(encodedPassword, key);
-        System.out.println("Password decoded: "+ password);
-        LogonWithUsername(username, password);
+        logonWithUsername(username, password);
     }
-    public void VerifyLogonSuccessfully(){}
+    public void verifyLogonSuccessfully(){}
 }

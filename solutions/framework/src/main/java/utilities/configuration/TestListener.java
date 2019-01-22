@@ -7,7 +7,6 @@ import com.aventstack.extentreports.MediaEntityModelProvider;
 import com.hansencx.solutions.core.BaseTest;
 import com.hansencx.solutions.logger.Log;
 import com.hansencx.solutions.reporting.extentreports.ExtentManager;
-import com.sun.org.apache.xml.internal.security.Init;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;

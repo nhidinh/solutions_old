@@ -17,28 +17,23 @@ import utilities.configuration.driver.DriverType;
 public class Browser {
     private static WebDriver driver;
     private static DriverManager driverManager;
-    public void Initialize(){
-    }
-    public static void Setup(DriverType browser, ITestContext context){
+    public static void setup(DriverType browser, ITestContext context){
         driverManager = DriverManagerFactory.getManager(browser);
         driver = driverManager.getDriver();
         context.setAttribute("driver", driver);
     }
-    public static void Maximize(){
+    public static void maximize(){
         driver.manage().window().maximize();
     }
-    public static String GetTitle(){
+    public static String getTitle(){
         return driver.getTitle();
     }
-    public static void Close(){
+    public static void close(){
         driver.manage().deleteAllCookies();
         driver.close();
     }
-    public static void Quit(){
+    public static void quit (){
         driver.manage().deleteAllCookies();
         driver.quit();
-    }
-    public static WebDriver GetDriver(ITestContext context){
-        return (WebDriver) context.getAttribute("driver");
     }
 }

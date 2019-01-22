@@ -24,7 +24,7 @@ public class SearchResultPage extends BasePage {
     @FindBy(xpath = "//table[@id='gvSearchResults']//tr")
     List<WebElement> lstResult;
 
-    public int GetNumberOfResult(){
+    public int getNumberOfResult(){
         return lstResult.size();
     }
 
